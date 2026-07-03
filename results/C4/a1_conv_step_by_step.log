@@ -1,0 +1,4 @@
+conv_forward  Z.shape = (2, 3, 4, 8)  Z.mean = 0.551128
+conv_backward dA (2, 5, 7, 4) dW (3, 3, 4, 8) db (1, 1, 1, 8)
+pool_forward(max) A.shape = (2, 3, 5, 4)  A.mean = 1.526043
+pool_backward dA_prev.shape = (2, 5, 7, 4)
