@@ -1,0 +1,23 @@
+downloading GloVe -> D:\Project\deep-learning\deep-learning-specialization\data\glove\glove.6B.zip (~800MB, one time)
+loaded 400001 GloVe vectors (50-d)
+cos(man,woman) = 0.8860
+cos(king,queen) = 0.7839
+cos(paris,france) = 0.8025
+cos(cat,dog) = 0.9218
+
+Analogies:
+  man : woman :: king : queen  (cos 0.861)
+  italy : italian :: spain : spanish  (cos 0.963)
+  india : delhi :: japan : tokyo  (cos 0.901)
+  small : smaller :: large : larger  (cos 0.936)
+
+Gender bias axis g = woman - man
+Similarity of names/roles with g (before):
+  receptionist   +0.3308
+  engineer       -0.0804
+  nurse          +0.3803
+  scientist      -0.0519
+
+cos(receptionist, g) after neutralize: +0.000000
+cos(man,g)  after equalize: -0.7004
+cos(woman,g) after equalize: +0.7004

@@ -1,0 +1,23 @@
+src vocab 36, tgt vocab 13, Tx 17, Ty 10
+epoch 1/12  loss 1.6738  char-acc 68.45%  exact-date  0.30%
+epoch 2/12  loss 0.6018  char-acc 91.63%  exact-date 41.90%
+epoch 3/12  loss 0.1152  char-acc 99.63%  exact-date 96.80%
+epoch 4/12  loss 0.0195  char-acc 99.98%  exact-date 99.80%
+epoch 5/12  loss 0.0058  char-acc 100.00%  exact-date 100.00%
+epoch 6/12  loss 0.0032  char-acc 100.00%  exact-date 100.00%
+epoch 7/12  loss 0.0022  char-acc 100.00%  exact-date 100.00%
+epoch 8/12  loss 0.0016  char-acc 100.00%  exact-date 100.00%
+epoch 9/12  loss 0.0013  char-acc 100.00%  exact-date 100.00%
+epoch 10/12  loss 0.0011  char-acc 100.00%  exact-date 100.00%
+epoch 11/12  loss 0.0009  char-acc 100.00%  exact-date 100.00%
+epoch 12/12  loss 0.0007  char-acc 100.00%  exact-date 100.00%
+
+Sample translations (human -> predicted ISO):
+  19.10.1960               -> 1960-10-19   (gold 1960-10-19)
+  5/8/2012                 -> 2012-08-05   (gold 2012-08-05)
+  november 27 1962         -> 1962-11-27   (gold 1962-11-27)
+  19 may 1969              -> 1969-05-19   (gold 1969-05-19)
+  july 26 1982             -> 1982-07-26   (gold 1982-07-26)
+  9 february 2001          -> 2001-02-09   (gold 2001-02-09)
+  28.11.1975               -> 1975-11-28   (gold 1975-11-28)
+  28/3/1976                -> 1976-03-28   (gold 1976-03-28)

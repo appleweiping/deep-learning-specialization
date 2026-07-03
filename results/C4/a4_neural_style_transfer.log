@@ -1,0 +1,10 @@
+# Neural Style Transfer (Gatys et al. 2015) — VGG19 backbone, synthetic content+style images
+# VGG19 ImageNet weights auto-downloaded via torchvision (progress bar omitted)
+Downloading VGG19_Weights.IMAGENET1K_V1 (548 MB) ... done
+step    0  content 0.0000  style 0.002775  total 2775.1580
+step   40  content 12.8548  style 0.000911  total 924.0714
+step   80  content 14.0017  style 0.000559  total 572.7584
+step  120  content 14.3662  style 0.000414  total 428.6328
+step  160  content 14.3226  style 0.000342  total 356.2985
+step  199  content 14.6247  style 0.000312  total 326.2729
+saved D:\Project\deep-learning\deep-learning-specialization\results\C4\neural_style_transfer.png

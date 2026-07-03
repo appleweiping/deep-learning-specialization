@@ -1,0 +1,10 @@
+iter    0  loss 2.7536  seq-acc  8.00%
+iter  100  loss 1.8218  seq-acc 30.44%
+iter  200  loss 1.4935  seq-acc 38.54%
+iter  300  loss 1.2614  seq-acc 43.97%
+iter  400  loss 0.9787  seq-acc 62.30%
+iter  500  loss 0.7148  seq-acc 75.16%
+iter  600  loss 0.6130  seq-acc 83.39%
+iter  700  loss 0.4659  seq-acc 88.00%
+iter  799  loss 0.3414  seq-acc 91.66%
+Final sequence accuracy (reverse task): 91.82%
