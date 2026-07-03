@@ -1,0 +1,13 @@
+iter     0  cost 0.693048
+iter  2000  cost 0.254385
+iter  4000  cost 0.226792
+iter  6000  cost 0.219731
+iter  8000  cost 0.219577
+1-hidden-layer (n_h=4) accuracy: 90.8%
+
+Hidden layer size sweep:
+  n_h=  1  accuracy 67.5%
+  n_h=  2  accuracy 67.2%
+  n_h=  4  accuracy 90.8%
+  n_h=  8  accuracy 91.8%
+  n_h= 20  accuracy 90.2%

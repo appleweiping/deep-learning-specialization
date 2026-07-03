@@ -1,0 +1,17 @@
+train X (784, 2000), test X (784, 1000)
+
+=== 2-layer network [n_x, 7, 1] ===
+iter     0  cost 0.685183
+iter   300  cost 0.325890
+iter   600  cost 0.192735
+iter   900  cost 0.149994
+iter  1200  cost 0.129273
+2-layer train acc 96.40%  test acc 94.90%
+
+=== 4-layer deep network [n_x, 20, 7, 5, 1] ===
+iter     0  cost 0.688553
+iter   300  cost 0.598077
+iter   600  cost 0.392775
+iter   900  cost 0.269497
+iter  1200  cost 0.171488
+4-layer train acc 96.55%  test acc 94.90%

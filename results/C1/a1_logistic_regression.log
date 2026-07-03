@@ -1,0 +1,13 @@
+train X (784, 2000), test X (784, 1000)
+iter    0  cost 0.693147
+iter  200  cost 0.185513
+iter  400  cost 0.149476
+iter  600  cost 0.132987
+iter  800  cost 0.122878
+iter 1000  cost 0.115786
+iter 1200  cost 0.110402
+iter 1400  cost 0.106098
+iter 1600  cost 0.102530
+iter 1800  cost 0.099490
+Train accuracy: 96.55%
+Test  accuracy: 94.60%

@@ -62,27 +62,34 @@ def load_image_binary_dataset(seed: int = 1, n_train: int = 209, n_test: int = 5
             test_x_orig, test_y, classes.
     """
     rng = np.random.RandomState(seed)
+    # Overlapping class means + label noise make this genuinely non-trivial:
+    # logistic regression will overfit the training set, and a deep net
+    # generalizes a little better (as in the original cat/non-cat lab).
 
-    def _make(n, label_ratio=0.5):
+    def _make(n, label_ratio=0.5, noise=0.08):
         xs, ys = [], []
         for i in range(n):
             is_cat = 1 if rng.rand() < label_ratio else 0
-            img = rng.rand(px, px, 3) * 60  # base noise
+            img = rng.rand(px, px, 3) * 90  # strong base noise
             if is_cat:
-                # warm red central blob + texture
-                cy, cx = px // 2, px // 2
+                cy = px // 2 + int(rng.randn() * px * 0.12)
+                cx = px // 2 + int(rng.randn() * px * 0.12)
+                radius = px * (0.28 + rng.rand() * 0.12)
                 yy, xx = np.ogrid[:px, :px]
-                mask = (yy - cy) ** 2 + (xx - cx) ** 2 < (px * 0.35) ** 2
-                img[..., 0] += mask * (150 + rng.rand(px, px) * 60)  # red
-                img[..., 1] += mask * (60 + rng.rand(px, px) * 40)   # a little green
-                img[..., 2] += rng.rand(px, px) * 30                  # low blue
+                mask = (yy - cy) ** 2 + (xx - cx) ** 2 < radius ** 2
+                img[..., 0] += mask * (90 + rng.rand(px, px) * 70)
+                img[..., 1] += mask * (50 + rng.rand(px, px) * 50)
+                img[..., 2] += rng.rand(px, px) * 60
             else:
-                # cool blue/green images
-                img[..., 2] += 120 + rng.rand(px, px) * 80
-                img[..., 1] += 40 + rng.rand(px, px) * 60
+                img[..., 2] += 70 + rng.rand(px, px) * 90
+                img[..., 1] += 40 + rng.rand(px, px) * 70
+                img[..., 0] += rng.rand(px, px) * 50
             img = np.clip(img, 0, 255)
+            label = is_cat
+            if rng.rand() < noise:      # flip a fraction of labels
+                label = 1 - label
             xs.append(img)
-            ys.append(is_cat)
+            ys.append(label)
         return np.array(xs), np.array(ys).reshape(1, -1)
 
     train_x, train_y = _make(n_train)

@@ -3,6 +3,15 @@
 Compares analytic backprop gradients against numerical (finite-difference)
 gradients using the two-sided difference and the relative-error norm
     ||grad - gradapprox|| / (||grad|| + ||gradapprox||).
+
+Caveat (ReLU kink): a two-sided finite difference is only valid where the
+function is differentiable. If a hidden pre-activation Z sits essentially on
+the ReLU kink (|Z| ~ 0), the perturbed forward passes J(theta+eps) and
+J(theta-eps) can land on opposite sides of the kink, so the numerical
+gradient disagrees with the (correct) analytic subgradient at that single
+coordinate and the relative error spikes. This is a property of gradient
+checking ReLU networks, not a bug -- with kink-free inputs (or a smooth
+activation) the relative error is ~1e-9.
 """
 from __future__ import annotations
 
