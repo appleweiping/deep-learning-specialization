@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Data caches (downloaded at runtime, not redistributed)
+data/*
+!data/.gitkeep
+!data/README.md
+*.h5
+*.gz
+*.tar
+*.zip
+*.pkl
+
+# Large model checkpoints
+*.pt
+*.pth
+*.ckpt
+*.npy
+!results/**/*.npy
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep results (evidence) but ignore scratch
+results/scratch/
