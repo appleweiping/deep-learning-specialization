@@ -1,0 +1,21 @@
+679 names, vocab size 27
+iter      0  loss 23.0939
+   samples: nspnkqkxzjunoxab, ks, k, nsgmxxceak
+iter   3000  loss 26.4286
+   samples: jmolisheophoes, bavetara, anoceratius, epaerus
+iter   6000  loss 24.1055
+   samples: gaphorandps, ochinhanltyuyloceratrpsasaurus, sarokuchoptor, tinbosaurus
+iter   9000  loss 23.0214
+   samples: gyulamorasaurus, astosaurus, ezizinsaurus, etinina
+iter  12000  loss 22.6403
+   samples: ieoptapenla, garitaniimapenixaaujontovaceratons, mahenheralia, jyurutopa
+iter  15000  loss 22.3581
+   samples: cyravtosaurus, urhelimisaurus, ehirchaphedlalisaurutosaurus, odheshusus
+iter  18000  loss 22.1450
+   samples: engrgirisaurus, phuberpteryx, capcoptor, ngryparosaurus
+iter  21000  loss 21.9840
+   samples: ablaptor, thotyanosaurus, patsarahaurimigetjia, cixanitersaurus
+
+Final smoothed loss: 21.9111
+Final generated names:
+  Odrephodynhus, Raronytus, Mononodrus, Wixosauria, Eloceratops, Aculoelcursaurus, Yueumauruptlendeplocaerus, Dotelia, Waha, Dinkelrautoneavarsaurus, Adaelrps, Olosaurupelya

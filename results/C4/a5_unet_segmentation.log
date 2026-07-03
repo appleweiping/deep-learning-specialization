@@ -1,0 +1,11 @@
+segmentation data: train (400, 3, 64, 64), test (100, 3, 64, 64), 3 classes
+U-Net params: 483,475
+epoch 1/8  loss 0.7227  pixel-acc 93.60%  mIoU 0.605  (27.9s)
+epoch 2/8  loss 0.5356  pixel-acc 99.31%  mIoU 0.962  (28.0s)
+epoch 3/8  loss 0.4314  pixel-acc 99.49%  mIoU 0.972  (33.4s)
+epoch 4/8  loss 0.3593  pixel-acc 99.69%  mIoU 0.983  (30.8s)
+epoch 5/8  loss 0.3018  pixel-acc 99.84%  mIoU 0.991  (32.4s)
+epoch 6/8  loss 0.2554  pixel-acc 99.86%  mIoU 0.992  (36.2s)
+epoch 7/8  loss 0.2171  pixel-acc 99.92%  mIoU 0.996  (25.0s)
+epoch 8/8  loss 0.1850  pixel-acc 99.95%  mIoU 0.997  (29.7s)
+saved D:\Project\deep-learning\deep-learning-specialization\results\C4\unet_segmentation_sample.png
