@@ -111,13 +111,19 @@ _MNIST_URLS = {
 
 
 def _download(url: str, dest: str) -> None:
-    if os.path.exists(dest):
+    if os.path.exists(dest) and os.path.getsize(dest) > 0:
         return
     _ensure_dir(os.path.dirname(dest))
-    print(f"downloading {url} -> {dest}")
+    print(f"downloading {url} -> {dest}", flush=True)
     req = urllib.request.Request(url, headers={"User-Agent": "csdiy-dlspec/1.0"})
-    with urllib.request.urlopen(req, timeout=120) as r, open(dest, "wb") as f:
-        f.write(r.read())
+    tmp = dest + ".part"
+    with urllib.request.urlopen(req, timeout=300) as r, open(tmp, "wb") as f:
+        while True:
+            chunk = r.read(1 << 20)  # stream 1MB at a time
+            if not chunk:
+                break
+            f.write(chunk)
+    os.replace(tmp, dest)
 
 
 def _read_idx_images(path: str) -> np.ndarray:
@@ -136,6 +142,60 @@ def _read_idx_labels(path: str) -> np.ndarray:
         buf = f.read(num)
         labels = np.frombuffer(buf, dtype=np.uint8)
     return labels
+
+
+_CIFAR_URL = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
+
+
+def load_cifar10(n_train: int | None = None, n_test: int | None = None,
+                 classes: tuple[int, ...] | None = None):
+    """Download (once) and load CIFAR-10 as NCHW float32 in [0,1].
+
+    Returns X_train (n,3,32,32), y_train (n,), X_test, y_test.
+    Optionally restrict to a subset of the 10 classes and relabel to 0..k-1.
+    """
+    import pickle
+    import tarfile
+
+    dest = os.path.join(_DATA_DIR, "cifar10", "cifar-10-python.tar.gz")
+    _download(_CIFAR_URL, dest)
+    root = os.path.join(_DATA_DIR, "cifar10")
+    extracted = os.path.join(root, "cifar-10-batches-py")
+    if not os.path.exists(extracted):
+        with tarfile.open(dest, "r:gz") as t:
+            t.extractall(root)
+
+    def _load_batch(path):
+        # CIFAR-10 batches are distributed as pickle files by the canonical
+        # toronto.edu source (the only supported on-disk format). We only ever
+        # unpickle the archive we downloaded from that trusted URL above.
+        with open(path, "rb") as f:
+            d = pickle.load(f, encoding="bytes")
+        X = d[b"data"].reshape(-1, 3, 32, 32).astype(np.float32) / 255.0
+        y = np.array(d[b"labels"], dtype=np.int64)
+        return X, y
+
+    Xtr_parts, ytr_parts = [], []
+    for i in range(1, 6):
+        X, y = _load_batch(os.path.join(extracted, f"data_batch_{i}"))
+        Xtr_parts.append(X)
+        ytr_parts.append(y)
+    Xtr = np.concatenate(Xtr_parts)
+    ytr = np.concatenate(ytr_parts)
+    Xte, yte = _load_batch(os.path.join(extracted, "test_batch"))
+
+    if classes is not None:
+        remap = {c: i for i, c in enumerate(classes)}
+        keep_tr = np.isin(ytr, classes)
+        keep_te = np.isin(yte, classes)
+        Xtr, ytr = Xtr[keep_tr], np.vectorize(remap.get)(ytr[keep_tr])
+        Xte, yte = Xte[keep_te], np.vectorize(remap.get)(yte[keep_te])
+
+    if n_train is not None:
+        Xtr, ytr = Xtr[:n_train], ytr[:n_train]
+    if n_test is not None:
+        Xte, yte = Xte[:n_test], yte[:n_test]
+    return Xtr, ytr, Xte, yte
 
 
 def load_mnist(n_train: int | None = None, n_test: int | None = None,

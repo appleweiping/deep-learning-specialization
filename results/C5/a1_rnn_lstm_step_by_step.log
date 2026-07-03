@@ -1,0 +1,2 @@
+RNN  forward: a.shape=(5, 10, 4)  y.shape=(2, 10, 4)  a[4,1,-1]=-0.9983
+LSTM forward: a.shape=(5, 10, 4)  c.shape=(5, 10, 4)  y.shape=(2, 10, 4)  a[4,1,-1]=0.0018
