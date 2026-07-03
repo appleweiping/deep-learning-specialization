@@ -1,0 +1,8 @@
+train (6000, 1, 28, 28), test (2000, 1, 28, 28), 10 identities
+iter    0  triplet-loss 0.1162  verification acc 68.90% (thr 0.437)
+iter   80  triplet-loss 0.0204  verification acc 89.75% (thr 0.701)
+iter  160  triplet-loss 0.0077  verification acc 92.65% (thr 0.801)
+iter  240  triplet-loss 0.0132  verification acc 91.70% (thr 0.809)
+iter  320  triplet-loss 0.0005  verification acc 92.10% (thr 0.780)
+iter  399  triplet-loss 0.0117  verification acc 93.65% (thr 0.809)
+Final verification accuracy: 93.75%  (threshold 0.779)
