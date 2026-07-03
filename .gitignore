@@ -34,3 +34,4 @@ Thumbs.db
 
 # Keep results (evidence) but ignore scratch
 results/scratch/
+!data/dinos.txt

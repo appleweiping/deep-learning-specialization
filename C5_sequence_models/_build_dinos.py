@@ -1,0 +1,116 @@
+"""Generate data/dinos.txt from a curated list of real dinosaur genus names.
+
+This makes the character-level language-model assignment fully self-contained
+and reproducible (no dependence on an external Coursera mirror). Every entry
+is a genuine paleontological genus name.
+"""
+import os
+
+NAMES = """Aardonyx Abelisaurus Abrictosaurus Abrosaurus Abydosaurus Acanthopholis Achelousaurus
+Achillobator Acristavus Acrocanthosaurus Adamantisaurus Adasaurus Adeopapposaurus Aegyptosaurus
+Aeolosaurus Aerosteon Afrovenator Agilisaurus Agujaceratops Agustinia Ahshislepelta Ajancingenia
+Alamosaurus Alaskacephale Albalophosaurus Albertaceratops Albertadromeus Albertonykus Albertosaurus
+Alectrosaurus Aletopelta Alioramus Allosaurus Alnashetri Altirhinus Altispinax Alvarezsaurus
+Alwalkeria Amargasaurus Amargatitanis Amazonsaurus Ammosaurus Ampelosaurus Amphicoelias Amtocephale
+Amurosaurus Amygdalodon Anabisetia Anasazisaurus Anatosaurus Anatotitan Anchiceratops Anchiornis
+Anchisaurus Andesaurus Angaturama Angolatitan Angulomastacator Ankylosaurus Anodontosaurus
+Anoplosaurus Anserimimus Antarctopelta Antarctosaurus Antetonitrus Anzu Aorun Apatosaurus
+Appalachiosaurus Aquilops Aragosaurus Aralosaurus Archaeoceratops Archaeodontosaurus Archaeopteryx
+Archaeornithomimus Arcovenator Arcusaurus Argentinosaurus Argyrosaurus Aristosuchus Arrhinoceratops
+Asylosaurus Atlasaurus Atrociraptor Aucasaurus Australodocus Australovenator Austroraptor
+Austrosaurus Avaceratops Aviatyrannis Avimimus Bactrosaurus Bagaceratops Bagaraatan Bahariasaurus
+Bainoceratops Balaur Bambiraptor Banji Barapasaurus Barilium Barosaurus Barrosasaurus Baryonyx
+Batyrosaurus Baurutitan Becklespinax Beibeilong Beipiaosaurus Beishanlong Bellusaurus Berberosaurus
+Bicentenaria Bissektipelta Bistahieversor Blasisaurus Bolong Bonapartenykus Bonatitan Bonitasaura
+Borealopelta Boreonykus Borogovia Brachiosaurus Brachyceratops Brachylophosaurus Brachytrachelopan
+Bravoceratops Brontomerus Brontosaurus Buitreraptor Byronosaurus Camarasaurus Camarillasaurus
+Camelotia Camptosaurus Carcharodontosaurus Carnotaurus Caudipteryx Cedarosaurus Cedarpelta
+Cedrorestes Centrosaurus Cerasinops Ceratosaurus Cetiosauriscus Cetiosaurus Changyuraptor
+Chaoyangsaurus Charonosaurus Chasmosaurus Chialingosaurus Chindesaurus Chinshakiangosaurus
+Chirostenotes Chubutisaurus Chungkingosaurus Citipati Coahuilaceratops Coelophysis Coelurus
+Coloradisaurus Compsognathus Concavenator Conchoraptor Confuciusornis Corythosaurus Cristatusaurus
+Cryolophosaurus Cumnoria Dacentrurus Dahalokely Dakotadon Dakotaraptor Daspletosaurus Daxiatitan
+Deinocheirus Deinonychus Delapparentia Deltadromeus Demandasaurus Denversaurus Diabloceratops
+Diamantinasaurus Dicraeosaurus Dilong Dilophosaurus Diluvicursor Dimorphodon Dinheirosaurus
+Diplodocus Dracopelta Dracorex Dracovenator Dreadnoughtus Dromaeosaurus Dromiceiomimus Dryosaurus
+Dryptosaurus Dubreuillosaurus Duriavenator Dyoplosaurus Dysalotosaurus Dyslocosaurus Echinodon
+Edmontonia Edmontosaurus Efraasia Einiosaurus Ekrixinatosaurus Elaphrosaurus Elmisaurus
+Elrhazosaurus Emausaurus Enigmosaurus Eoabelisaurus Eobrontosaurus Eocarcharia Eoceratops
+Eodromaeus Eolambia Eomamenchisaurus Eoraptor Eosinopteryx Eotrachodon Eotriceratops Eotyrannus
+Epachthosaurus Epidendrosaurus Epidexipteryx Equijubus Erketu Erlikosaurus Euhelopus
+Euoplocephalus Europasaurus Europelta Euskelosaurus Eustreptospondylus Fabrosaurus Falcarius
+Ferganasaurus Fukuiraptor Fukuisaurus Fukutitan Fulgurotherium Fusuisaurus Futalognkosaurus
+Gallimimus Galveosaurus Gargoyleosaurus Garudimimus Gasosaurus Gasparinisaura Gastonia
+Genyodectes Giganotosaurus Gigantoraptor Gigantspinosaurus Gilmoreosaurus Giraffatitan
+Glacialisaurus Glishades Gobiceratops Gojirasaurus Gorgosaurus Goyocephale Graciliceratops
+Gryphoceratops Gryposaurus Guaibasaurus Guanlong Gwawinapterus Hadrosaurus Hagryphus
+Halszkaraptor Haplocanthosaurus Haplocheirus Harpymimus Herrerasaurus Hesperonychus Hesperosaurus
+Heterodontosaurus Heyuannia Hippodraco Homalocephale Hongshanosaurus Huabeisaurus Huanansaurus
+Huaxiagnathus Huayangosaurus Hudiesaurus Hungarosaurus Huxleysaurus Hypacrosaurus Hypselosaurus
+Hypsilophodon Iguanacolossus Iguanodon Ilokelesia Incisivosaurus Indosuchus Ingenia Irritator
+Isanosaurus Isisaurus Jainosaurus Jaklapallisaurus Janenschia Jaxartosaurus Jeholosaurus
+Jianchangosaurus Jinfengopteryx Jingshanosaurus Jinzhousaurus Jobaria Judiceratops Juratyrant
+Juravenator Kaijiangosaurus Kakuru Kamuysaurus Kangnasaurus Kaprosuchus Kazaklambia Kelmayisaurus
+Kentrosaurus Kerberosaurus Khaan Kileskus Kinnareemimus Kosmoceratops Kotasaurus Kritosaurus
+Kryptops Kukufeldia Kulceratops Kulindadromeus Kundurosaurus Labocania Lambeosaurus Lamplughsaura
+Lanzhousaurus Laplatasaurus Lapparentosaurus Latenivenatrix Leaellynasaura Leptoceratops
+Lesothosaurus Lessemsaurus Levnesovia Leyesaurus Liaoceratops Liaoningosaurus Ligabuesaurus
+Liliensternus Limaysaurus Limusaurus Linhenykus Linheraptor Lophorhothon Lophostropheus
+Loricatosaurus Lourinhanosaurus Lourinhasaurus Luanchuanraptor Lufengosaurus Lurdusaurus Lusotitan
+Lythronax Maiasaura Magnapaulia Magyarosaurus Mahakala Majungasaurus Malawisaurus Mamenchisaurus
+Manidens Mantellisaurus Mapusaurus Marshosaurus Masiakasaurus Massospondylus Maxakalisaurus
+Medusaceratops Megalosaurus Megapnosaurus Mei Melanorosaurus Mendozasaurus Mercuriceratops
+Metriacanthosaurus Microceratus Micropachycephalosaurus Microraptor Microvenator Minmi
+Minotaurasaurus Miragaia Mirischia Mongolosaurus Monkonosaurus Monolophosaurus Mononykus
+Montanoceratops Mussaurus Muttaburrasaurus Mymoorapelta Nankangia Nanosaurus Nanotyrannus
+Nanshiungosaurus Nanuqsaurus Nasutoceratops Nedcolbertia Neimongosaurus Nemegtomaia Nemegtosaurus
+Neovenator Neuquenraptor Neuquensaurus Nigersaurus Ningyuansaurus Nipponosaurus Noasaurus
+Nodocephalosaurus Nodosaurus Nomingia Nothronychus Notohypsilophodon Nqwebasaurus Nuthetes
+Nyasasaurus Ohmdenosaurus Ojoceratops Olorotitan Omeisaurus Oohkotokia Ophthalmosaurus
+Opisthocoelicaudia Orkoraptor Ornithomimus Orodromeus Oryctodromeus Othnielia Ouranosaurus
+Overoraptor Oviraptor Owenodon Oxalaia Pachycephalosaurus Pachyrhinosaurus Palaeoscincus
+Paluxysaurus Pampadromaeus Panamericansaurus Panoplosaurus Pantydraco Paranthodon Parasaurolophus
+Parksosaurus Paronychodon Parvicursor Patagonykus Patagosaurus Pawpawsaurus Pectinodon Pedopenna
+Pegomastax Pelecanimimus Pentaceratops Piatnitzkysaurus Pinacosaurus Pitekunsaurus Planicoxa
+Plateosaurus Pneumatoraptor Podokesaurus Poekilopleuron Polacanthus Prenocephale Prenoceratops
+Proceratosaurus Procompsognathus Prosaurolophus Protarchaeopteryx Protoceratops Psittacosaurus
+Pukyongosaurus Pyroraptor Qantassaurus Qiaowanlong Qingxiusaurus Qiupalong Quaesitosaurus
+Rahiolisaurus Rahonavis Rajasaurus Rapetosaurus Rativates Rayososaurus Rebbachisaurus
+Regaliceratops Regnosaurus Rhabdodon Rhoetosaurus Rinchenia Riojasaurus Rubeosaurus Rugops
+Ruyangosaurus Saichania Saltasaurus Saltopus Sanjuansaurus Santanaraptor Sarahsaurus Sarcosaurus
+Saurolophus Sauropelta Saurophaganax Saurornithoides Saurornitholestes Scansoriopteryx
+Scelidosaurus Sciurumimus Scolosaurus Scutellosaurus Secernosaurus Segisaurus Segnosaurus
+Seismosaurus Sellosaurus Serendipaceratops Shamosaurus Shanag Shantungosaurus Shanxia Shaochilong
+Shenzhousaurus Shixinggia Shuangbaisaurus Shunosaurus Shuvuuia Siamotyrannus Siamraptor
+Sigilmassasaurus Silvisaurus Similicaudipteryx Sinocalliopteryx Sinoceratops Sinornithoides
+Sinornithomimus Sinornithosaurus Sinosauropteryx Sinovenator Sinraptor Sinusonasus Skorpiovenator
+Sonorasaurus Spinophorosaurus Spinops Spinosaurus Staurikosaurus Stegoceras Stegosaurus Stenopelix
+Stormbergia Struthiomimus Struthiosaurus Stygimoloch Styracosaurus Suchomimus Supersaurus
+Suuwassea Suzhousaurus Talarurus Talenkauen Talos Tanius Tapejara Tarbosaurus Tarchia
+Tastavinsaurus Tatankacephalus Tataouinea Tawa Tazoudasaurus Tehuelchesaurus Telmatosaurus
+Tenontosaurus Teratophoneus Tethyshadros Texacephale Thecodontosaurus Therizinosaurus
+Thescelosaurus Tianchisaurus Tianyulong Tianyuraptor Titanoceratops Titanosaurus Tochisaurus
+Tornieria Torosaurus Torvosaurus Triceratops Troodon Tsaagan Tsintaosaurus Tuojiangosaurus
+Turiasaurus Tylocephale Tyrannosaurus Tyrannotitan Udanoceratops Unaysaurus Unenlagia
+Unescoceratops Utahceratops Utahraptor Valdosaurus Variraptor Velafrons Velociraptor Venenosaurus
+Vespersaurus Vulcanodon Wannanosaurus Wendiceratops Wintonotitan Wuerhosaurus Wulagasaurus
+Xenoceratops Xenotarsosaurus Xiaosaurus Xiaotingia Xingxiulong Xixianykus Xixiasaurus
+Xuanhanosaurus Xuanhuaceratops Xuwulong Yamaceratops Yandusaurus Yangchuanosaurus Yaverlandia
+Yehuecauhceratops Yimenosaurus Yingshanosaurus Yinlong Yixianosaurus Yizhousaurus Yongjinglong
+Yuanmousaurus Yueosaurus Yulong Yunganglong Yunnanosaurus Yurgovuchia Yutyrannus Zalmoxes
+Zanabazar Zapalasaurus Zephyrosaurus Zhanghenglong Zhejiangosaurus Zhenyuanlong Zhongyuansaurus
+Zhuchengceratops Zhuchengtyrannus Ziapelta Zigongosaurus Zuniceratops Zuolong Zuul Zupaysaurus"""
+
+
+def main():
+    names = sorted(set(n.strip() for n in NAMES.split() if n.strip()))
+    here = os.path.dirname(os.path.abspath(__file__))
+    out = os.path.join(os.path.dirname(here), "data", "dinos.txt")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w") as f:
+        f.write("\n".join(names) + "\n")
+    print(f"{len(names)} unique dinosaur names -> {out}")
+
+
+if __name__ == "__main__":
+    main()
