@@ -1,0 +1,3 @@
+init=zeros    train acc  50.00%  final cost 0.6931
+init=random   train acc  51.75%  final cost 11.0621
+init=he       train acc  93.00%  final cost 0.1721

@@ -1,0 +1,9 @@
+epoch 1/8  loss 0.6045  train acc 94.75%  test acc 94.30%
+epoch 2/8  loss 0.1700  train acc 96.30%  test acc 95.45%
+epoch 3/8  loss 0.1234  train acc 96.88%  test acc 95.65%
+epoch 4/8  loss 0.0984  train acc 97.88%  test acc 96.35%
+epoch 5/8  loss 0.0742  train acc 98.67%  test acc 97.15%
+epoch 6/8  loss 0.0587  train acc 98.27%  test acc 96.20%
+epoch 7/8  loss 0.0443  train acc 99.15%  test acc 97.15%
+epoch 8/8  loss 0.0366  train acc 99.10%  test acc 96.80%
+Final test accuracy: 96.80%

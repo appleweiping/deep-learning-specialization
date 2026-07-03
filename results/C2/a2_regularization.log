@@ -1,0 +1,3 @@
+none                  train  96.67%  test  86.05%
+L2 (lambda=0.3)       train  89.17%  test  90.79%
+dropout (keep=0.7)    train  95.00%  test  88.68%

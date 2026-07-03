@@ -1,0 +1,2 @@
+Correct backprop:   relative error = 1.511e-09  (seed 6)  -> PASS (<1e-7)
+Buggy backprop:     relative error = 2.250e-01  -> DETECTED (>1e-7)
