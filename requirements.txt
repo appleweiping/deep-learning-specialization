@@ -7,8 +7,9 @@ Pillow>=9.5
 imageio>=2.30
 
 # PyTorch (CPU) — used for the framework-based assignments
-# (ResNet, U-Net, YOLO decode, style transfer, Transformer)
+# (ResNet, U-Net, face-recognition, style transfer, NMT+attention, Transformer)
 torch>=2.0
+torchvision>=0.15   # pretrained VGG19 for neural style transfer
 
 # Testing
 pytest>=7.0
